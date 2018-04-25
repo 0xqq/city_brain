@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alibaba.brain.mapper.CityPostureMapper">
+  <resultMap id="BaseResultMap" type="com.alibaba.brain.model.CityPosture">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="vehicle_id" jdbcType="VARCHAR" property="vehicleId" />
+    <result column="entry_time" jdbcType="TIMESTAMP" property="entryTime" />
+    <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="vehicle_type" jdbcType="VARCHAR" property="vehicleType" />
+    <result column="camera_id" jdbcType="VARCHAR" property="cameraId" />
+    <result column="camera_position" jdbcType="VARCHAR" property="cameraPosition" />
+    <result column="direction_id" jdbcType="INTEGER" property="directionId" />
+    <result column="road_id" jdbcType="INTEGER" property="roadId" />
+    <result column="turn_id" jdbcType="INTEGER" property="turnId" />
+    <result column="date_string" jdbcType="VARCHAR" property="dateString" />
+    <result column="memo" jdbcType="LONGVARCHAR" property="memo" />
+    <result column="cross_url" jdbcType="LONGVARCHAR" property="crossUrl" />
+    <result column="full_oss_url" jdbcType="LONGVARCHAR" property="fullOssUrl" />
+    <result column="event_id" jdbcType="LONGVARCHAR" property="eventId" />
+    <result column="event_type" jdbcType="LONGVARCHAR" property="eventType" />
+  </resultMap>
+
+
+  <select id="selectById" resultMap="BaseResultMap">
+    SELECT * FROM city_posture WHERE 1=1
+    <if test="cityId != null and cityId != '' ">
+      id = #{cityId}
+    </if>
+  </select>
+
+  <select id="queryCityPosture" resultMap="BaseResultMap">
+    SELECT * FROM city_posture WHERE 1=1
+    <if test="startTime != null">
+      AND  start_time = #{startTime}
+    </if>
+    <if test="endTime != null">
+      AND  end_time = #{endTime}
+    </if>
+    <if test="keyWord != null and keyWord != ''">
+      AND camera_position LIKE '%${keyWord}%'
+    </if>
+
+  </select>
+
+
+</mapper>
